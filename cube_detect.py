@@ -5,10 +5,6 @@ import numpy as np
 picam2 = Picamera2()
 picam2.start()
 
-frame = picam2.capture_array()
-frame_bgr = cv2.cvtColor(frame, cv2.COLOR_RGBA2BGR)
-hsv = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2HSV)
-
 color_ranges = {
     "white":   ([0, 0, 200], [180, 30, 255]),
     "yellow":  ([20, 100, 100], [30, 255, 255]),
@@ -34,31 +30,30 @@ def detect_color(hsv_region):
         dominant_color = "red"
     return dominant_color
 
-height, width, _ = frame_bgr.shape
-grid_h = height // 3
-grid_w = width // 3
+while True:
+    frame = picam2.capture_array()
+    frame_bgr = cv2.cvtColor(frame, cv2.COLOR_RGBA2BGR)
+    hsv = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2HSV)
+    height, width, _ = frame_bgr.shape
+    grid_h = height // 3
+    grid_w = width // 3
+    cube_face = []
+    for i in range(3):
+        row = []
+        for j in range(3):
+            x1 = j * grid_w
+            y1 = i * grid_h
+            x2 = x1 + grid_w
+            y2 = y1 + grid_h
+            cell = hsv[y1:y2, x1:x2]
+            color = detect_color(cell)
+            row.append(color)
+            cv2.rectangle(frame_bgr, (x1, y1), (x2, y2), (0, 0, 0), 2)
+            cv2.putText(frame_bgr, color, (x1 + 5, y1 + 25), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
+        cube_face.append(row)
+    cv2.imshow("Live Cube Detection", frame_bgr)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
 
-cube_face = []
-
-for i in range(3):
-    row = []
-    for j in range(3):
-        x1 = j * grid_w
-        y1 = i * grid_h
-        x2 = x1 + grid_w
-        y2 = y1 + grid_h
-        cell = hsv[y1:y2, x1:x2]
-        color = detect_color(cell)
-        row.append(color)
-        cv2.rectangle(frame_bgr, (x1, y1), (x2, y2), (0,0,0), 2)
-        cv2.putText(frame_bgr, color, (x1 + 5, y1 + 25), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,0,0), 2)
-    cube_face.append(row)
-
-print("Detected cube face colors (3x3 array):")
-for row in cube_face:
-    print(row)
-
-cv2.imshow("Cube Face Detection", frame_bgr)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 picam2.close()
+cv2.destroyAllWindows()
