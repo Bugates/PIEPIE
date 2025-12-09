@@ -14,8 +14,8 @@ body {
 }
 
 .scene {
-    width: 250px;
-    height: 250px;
+    width: 260px;
+    height: 260px;
     margin-top: 60px;
     perspective: 900px;
 }
@@ -28,33 +28,50 @@ body {
     cursor: grab;
 }
 
-/* Rubik colors */
-.front  { background: #ff3b30; }   /* red */
-.back   { background: #ffcc00; }   /* yellow */
-.right  { background: #4cd964; }   /* green */
-.left   { background: #007aff; }   /* blue */
-.top    { background: #ffffff; color: black; } /* white */
-.bottom { background: #ff9500; }   /* orange */
-
+/* GENERAL FACE LAYOUT — real 3×3 stickers */
 .face {
     position: absolute;
-    width: 250px;
-    height: 250px;
-    border: 8px solid #000;
+    width: 260px;
+    height: 260px;
     box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.6rem;
-    font-weight: bold;
-    user-select: none;
-    transition: transform 0.2s;
+    border: 8px solid black;
+    background: black;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
 }
 
-/* Cube face positions */
-.front  { transform: rotateY(  0deg) translateZ(125px); }
-.back   { transform: rotateY(180deg) translateZ(125px); }
-.right  { transform: rotateY( 90deg) translateZ(125px); }
-.left   { transform: rotateY(-90deg) translateZ(125px); }
-.top    { transform: rotateX( 90deg) translateZ(125px); }
-.bottom { transform: rotateX(-90deg) translateZ(125px); }
+.face div {
+    background: grey; /* should not show, overwritten by color classes */
+    border: 3px solid black;
+}
+
+/* LABEL TEXT */
+.label {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: white;
+    text-shadow: 0 0 6px black;
+    pointer-events: none;
+}
+
+/* RUBIK COLORS FOR EACH FACE’S STICKERS */
+.front div  { background: red; }
+.back div   { background: yellow; }
+.right div  { background: green; }
+.left div   { background: blue; }
+.top div    { background: white; }
+.bottom div { background: orange; }
+
+/* 3D positioning */
+.front  { transform: rotateY(  0deg) translateZ(130px); }
+.back   { transform: rotateY(180deg) translateZ(130px); }
+.right  { transform: rotateY( 90deg) translateZ(130px); }
+.left   { transform: rotateY(-90deg) translateZ(130px); }
+.top    { transform: rotateX( 90deg) translateZ(130px); }
+.bottom { transform: rotateX(-90deg) translateZ(130px); }
