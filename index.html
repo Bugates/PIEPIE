@@ -3,123 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Self-Solving Rubik Cube</title>
+    <title>Rubik Cube Navigation</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1 class="title">Rubik Cube Portfolio</h1>
-<p class="subtitle">Watch the cube solve itself to reveal Home, Electrical, and Mechanical.</p>
+<h1 class="title">Rubik's Cube Navigation</h1>
 
 <div class="scene">
     <div id="cube" class="cube">
-        <!-- FRONT: Home -->
-        <div class="face front" data-section="home">
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
+
+        <div class="face front" data-link="home.html">
+            <div class="label">Home</div>
         </div>
 
-        <!-- BACK -->
-        <div class="face back" data-section="">
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
+        <div class="face back" data-link="electrical.html">
+            <div class="label">Electrical</div>
         </div>
 
-        <!-- RIGHT: Electrical -->
-        <div class="face right" data-section="electrical">
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
+        <div class="face right" data-link="mechanical.html">
+            <div class="label">Mechanical</div>
         </div>
 
-        <!-- LEFT -->
-        <div class="face left" data-section="">
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
+        <div class="face left" data-link="about.html">
+            <div class="label">About</div>
         </div>
 
-        <!-- TOP: Mechanical -->
-        <div class="face top" data-section="mechanical">
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
+        <div class="face top" data-link="projects.html">
+            <div class="label">Projects</div>
         </div>
 
-        <!-- BOTTOM -->
-        <div class="face bottom" data-section="">
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
-            <div class="sticker"></div>
+        <div class="face bottom" data-link="contact.html">
+            <div class="label">Contact</div>
         </div>
+
     </div>
 </div>
-
-<main class="content">
-    <section id="home" class="content-section hidden">
-        <h2>Home</h2>
-        <p>
-            Welcome to the home section. You can use this area for a short intro,
-            who you are, and what this site is about.
-        </p>
-    </section>
-
-    <section id="electrical" class="content-section hidden">
-        <h2>Electrical</h2>
-        <p>
-            This section can showcase your electrical projects, circuits, PCB designs,
-            embedded work, or anything related to electronics.
-        </p>
-    </section>
-
-    <section id="mechanical" class="content-section hidden">
-        <h2>Mechanical</h2>
-        <p>
-            Use this space for mechanical builds, CAD, manufacturing, mechanisms,
-            robots, or anything hardware and motion focused.
-        </p>
-    </section>
-</main>
 
 <script src="script.js"></script>
 </body>
 </html>
-
