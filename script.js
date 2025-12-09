@@ -2,12 +2,11 @@ const cube = document.getElementById("cube");
 
 let isDragging = false;
 let startX, startY;
-let currentRotX = -20;
-let currentRotY = 0;
+let rotX = -20;
+let rotY = 0;
 
-cube.style.transform = `rotateX(${currentRotX}deg) rotateY(${currentRotY}deg)`;
+cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
 
-// Mouse down
 cube.addEventListener("mousedown", e => {
     isDragging = true;
     startX = e.clientX;
@@ -15,63 +14,46 @@ cube.addEventListener("mousedown", e => {
     cube.style.cursor = "grabbing";
 });
 
-// Mouse move
 document.addEventListener("mousemove", e => {
     if (!isDragging) return;
-
     const dx = e.clientX - startX;
     const dy = e.clientY - startY;
-
-    currentRotY += dx * 0.4;
-    currentRotX -= dy * 0.4;
-
-    cube.style.transform =
-        `rotateX(${currentRotX}deg) rotateY(${currentRotY}deg)`;
-
+    rotY += dx * 0.4;
+    rotX -= dy * 0.4;
+    cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
     startX = e.clientX;
     startY = e.clientY;
 });
 
-// Mouse up
 document.addEventListener("mouseup", () => {
     isDragging = false;
     cube.style.cursor = "grab";
 });
 
-// Touch events
 cube.addEventListener("touchstart", e => {
+    const t = e.touches[0];
+    startX = t.clientX;
+    startY = t.clientY;
     isDragging = true;
-    const touch = e.touches[0];
-    startX = touch.clientX;
-    startY = touch.clientY;
 });
 
 cube.addEventListener("touchmove", e => {
     if (!isDragging) return;
-    const touch = e.touches[0];
-
-    const dx = touch.clientX - startX;
-    const dy = touch.clientY - startY;
-
-    currentRotY += dx * 0.4;
-    currentRotX -= dy * 0.4;
-
-    cube.style.transform =
-        `rotateX(${currentRotX}deg) rotateY(${currentRotY}deg)`;
-
-    startX = touch.clientX;
-    startY = touch.clientY;
+    const t = e.touches[0];
+    const dx = t.clientX - startX;
+    const dy = t.clientY - startY;
+    rotY += dx * 0.4;
+    rotX -= dy * 0.4;
+    cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+    startX = t.clientX;
+    startY = t.clientY;
 });
 
-cube.addEventListener("touchend", () => {
-    isDragging = false;
-});
+cube.addEventListener("touchend", () => isDragging = false);
 
-// Click → navigate
+/* CLICK → NAVIGATE */
 document.querySelectorAll(".face").forEach(face => {
     face.addEventListener("click", () => {
-        if (!isDragging) {
-            window.location.href = face.dataset.link;
-        }
+        if (!isDragging) window.location.href = face.dataset.link;
     });
 });
